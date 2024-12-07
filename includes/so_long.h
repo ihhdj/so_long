@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:54:31 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/06 19:46:50 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/07 13:19:19 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,29 @@
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
-//# include "mlx.h"
 # include "../libft/header/libft.h"
 # include "../libft/header/get_next_line.h"
 # include "../libft/header/ft_printf.h"
+# include <mlx.h>
+
+typedef struct s_map
+{
+	char	**gnlmap;
+	int		width;
+	int		height;
+	int		player_x;
+	int		player_y;
+	int		collectibles;
+	int		exits;
+	int		players;
+}	t_map;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*textures[5];
+	t_map	*map;
+}	t_data;
 
 #endif
