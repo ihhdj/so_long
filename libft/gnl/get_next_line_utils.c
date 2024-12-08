@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: iheb <iheb@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:31:40 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/06 19:16:29 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:21:47 by iheb             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,7 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+size_t	ft_strlen(const char *s);
 
 char	*ft_strjoin(char *s1, char *s2)
 {
