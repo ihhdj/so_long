@@ -6,7 +6,7 @@
 /*   By: iheb <iheb@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/08 13:47:34 by iheb             ###   ########.fr       */
+/*   Updated: 2024/12/08 13:50:50 by iheb             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**stock_map(char *filename)
 
 	i = 0;
 	fd = open(filename, O_RDONLY);
-	map = malloc(sizeof(char *) * (MAX_LIGNES + 1);
+	map = malloc(sizeof(char *) * (MAX_LIGNES + 1));
 	if (!map)
 		return (NULL);
 	if (fd < 0)
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 		if(ft_strncmp(argv[1] + len_argv - 4, ext, 20) != 0)
 			ft_printf("choose a .ber file\n");
 		check_file(argv[1]);
-		printf("%s", (char *)stock_map(argv[1]));
+		stock_map(argv[1]);
 	}
 	return (0);
 }
