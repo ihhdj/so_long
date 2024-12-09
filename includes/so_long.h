@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iheb <iheb@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:54:31 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/08 13:16:43 by iheb             ###   ########.fr       */
+/*   Updated: 2024/12/09 10:44:11 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# define MAX_LIGNES 1000
+# define MAX_LIGNES 10000
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>

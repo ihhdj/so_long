@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iheb <iheb@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/08 14:10:42 by iheb             ###   ########.fr       */
+/*   Updated: 2024/12/09 14:27:57 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 
 int	check_map_form(char **map)
 {
-	int	taille;
-	int	i;
+	size_t	taille;
+	int		i;
 
-	i = 1;
 	taille = ft_strlen(map[0]);
+	i = 1;
+	if (!map || !map[0])
+	{
+		ft_printf("Error\n%s", "map does not exist");
+		exit(EXIT_FAILURE);
+	}
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) != (size_t)taille)
+		if (ft_strlen(map[i]) != taille)
 		{
-			ft_printf("Error, map is not rectangular");
-			return (0);
+			ft_printf("Error\n%s", "invalid map");
+			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
@@ -40,19 +45,18 @@ char	**stock_map(char *filename)
 
 	i = 0;
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		exit(EXIT_FAILURE);	
 	map = malloc(sizeof(char *) * (MAX_LIGNES + 1));
 	if (!map)
-		return (NULL);
-	if (fd < 0)
-		return (NULL);
-	while ((ligne = get_next_line(fd)))
+		exit(EXIT_FAILURE);
+	ligne = get_next_line(fd);
+	while (ligne)
 	{
-		if (i >= MAX_LIGNES)
-		{
-			free (ligne);
-			break;
-		}
+		if (ligne[ft_strlen(ligne) - 1] == '\n')
+			ligne[ft_strlen(ligne) - 1] = '\0';
 		map[i++] = ligne;
+		ligne = get_next_line(fd);
 	}
 	map[i] = NULL;
 	close (fd);
@@ -66,13 +70,24 @@ int	check_file(char *map)
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error, cannot open this file\n");
-		return (0);
+		ft_printf("Error\n%s", "cannot open this file");
+		exit(EXIT_FAILURE);
 	}
-	close(fd);
+	close (fd);
 	return (1);
 }
+void	free_map(char **map)
+{
+	int	i;
 
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
 int	main(int argc, char **argv)
 {
 	int		len_argv;
@@ -80,16 +95,23 @@ int	main(int argc, char **argv)
 	char	**map;
 
 	if (argc != 2)
-		ft_printf("Arguments error\n");
+	{
+		ft_printf("Error\n%s", "argument error");
+		exit(EXIT_FAILURE);
+	}
 	else
 	{
 		ext = ".ber";
 		len_argv = ft_strlen(argv[1]);
-		if(ft_strncmp(argv[1] + len_argv - 4, ext, 20) != 0)
-			ft_printf("choose a .ber file\n");
+		if (ft_strncmp(argv[1] + len_argv - 4, ext, 20) != 0)
+		{	
+			ft_printf ("Error\n%s", "choose a .ber file");
+			exit(EXIT_FAILURE);;
+		}
 		check_file(argv[1]);
 		map = stock_map(argv[1]);
 		check_map_form(map);
+		free_map(map);
 	}
 	return (0);
 }
