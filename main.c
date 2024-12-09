@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/09 14:27:57 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:11:56 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ void	free_map(char **map)
 }
 int	main(int argc, char **argv)
 {
-	int		len_argv;
-	char	*ext;
 	char	**map;
 
 	if (argc != 2)
@@ -99,19 +97,14 @@ int	main(int argc, char **argv)
 		ft_printf("Error\n%s", "argument error");
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		ext = ".ber";
-		len_argv = ft_strlen(argv[1]);
-		if (ft_strncmp(argv[1] + len_argv - 4, ext, 20) != 0)
-		{	
-			ft_printf ("Error\n%s", "choose a .ber file");
-			exit(EXIT_FAILURE);;
-		}
-		check_file(argv[1]);
-		map = stock_map(argv[1]);
-		check_map_form(map);
-		free_map(map);
+	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 20) != 0)
+	{	
+		ft_printf ("Error\n%s", "choose a .ber file");
+		exit(EXIT_FAILURE);;
 	}
+	check_file(argv[1]);
+	map = stock_map(argv[1]);
+	check_map_form(map);
+	free_map(map);
 	return (0);
 }
