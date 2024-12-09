@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/09 15:11:56 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:48:40 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ char	**stock_map(char *filename)
 	i = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		exit(EXIT_FAILURE);	
+		exit(EXIT_FAILURE);
 	map = malloc(sizeof(char *) * (MAX_LIGNES + 1));
 	if (!map)
 		exit(EXIT_FAILURE);
 	ligne = get_next_line(fd);
+	if (!ligne)
+		exit(EXIT_FAILURE);
 	while (ligne)
 	{
 		if (ligne[ft_strlen(ligne) - 1] == '\n')
@@ -76,6 +78,7 @@ int	check_file(char *map)
 	close (fd);
 	return (1);
 }
+
 void	free_map(char **map)
 {
 	int	i;
@@ -88,6 +91,7 @@ void	free_map(char **map)
 	}
 	free(map);
 }
+
 int	main(int argc, char **argv)
 {
 	char	**map;
@@ -98,9 +102,9 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 20) != 0)
-	{	
+	{
 		ft_printf ("Error\n%s", "choose a .ber file");
-		exit(EXIT_FAILURE);;
+		exit(EXIT_FAILURE);
 	}
 	check_file(argv[1]);
 	map = stock_map(argv[1]);
