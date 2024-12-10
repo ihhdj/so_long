@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:42:19 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/10 20:37:00 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:43:54 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	check_items(t_parse *parse)
 	if (parse->eexit != 1 || parse->pos != 1 || parse->item <= 0)
 	{
 		printf("Error\n%s", "invalid map");
-		exit(EXIT_FAILURE);
 	}
 	return (1);
 }
