@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:54:31 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/09 10:44:11 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:53:21 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,10 @@ typedef struct s_data
 	t_map	*map;
 }	t_data;
 
+int		check_map_form(char **map);
+char	**stock_map(char *filename);
+int		check_file(char *map);
+void	free_map(char **map);
+int		main(int argc, char **argv);
+int		check_walls(char	**map);
 #endif

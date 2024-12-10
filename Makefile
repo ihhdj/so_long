@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iheb <iheb@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 16:24:58 by ihhadjal          #+#    #+#              #
-#    Updated: 2024/12/08 14:10:12 by iheb             ###   ########.fr        #
+#    Updated: 2024/12/09 17:56:41 by ihhadjal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c so_long.c
+SRCS = main.c so_long.c main2.c
 OBJS = ${SRCS:.c=.o}
 NAME = so_long
 CC = gcc

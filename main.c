@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/09 15:48:40 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:05:40 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ int	main(int argc, char **argv)
 	map = stock_map(argv[1]);
 	check_map_form(map);
 	free_map(map);
+	check_walls(map);
 	return (0);
 }
