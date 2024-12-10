@@ -6,27 +6,27 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/09 18:05:40 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:23:37 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 
-int	check_map_form(char **map)
+int	check_map_form(t_parse *parse)
 {
-	size_t	taille;
 	int		i;
-
-	taille = ft_strlen(map[0]);
+	size_t	line;
+	
+	line = ft_strlen(parse->map[0]);
 	i = 1;
-	if (!map || !map[0])
+	if (!parse->map || !parse->map[0])
 	{
 		ft_printf("Error\n%s", "map does not exist");
 		exit(EXIT_FAILURE);
 	}
-	while (map[i])
+	while (parse->map[i])
 	{
-		if (ft_strlen(map[i]) != taille)
+		if (ft_strlen(parse->map[i]) != line)
 		{
 			ft_printf("Error\n%s", "invalid map");
 			exit(EXIT_FAILURE);
@@ -36,9 +36,8 @@ int	check_map_form(char **map)
 	return (1);
 }
 
-char	**stock_map(char *filename)
+void stock_map(char *filename,  t_parse *parse)
 {
-	char	**map;
 	char	*ligne;
 	int		fd;
 	int		i;
@@ -47,8 +46,8 @@ char	**stock_map(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		exit(EXIT_FAILURE);
-	map = malloc(sizeof(char *) * (MAX_LIGNES + 1));
-	if (!map)
+	parse->map = malloc(sizeof(char *) * (MAX_LIGNES + 1));
+	if (!parse->map)
 		exit(EXIT_FAILURE);
 	ligne = get_next_line(fd);
 	if (!ligne)
@@ -57,13 +56,13 @@ char	**stock_map(char *filename)
 	{
 		if (ligne[ft_strlen(ligne) - 1] == '\n')
 			ligne[ft_strlen(ligne) - 1] = '\0';
-		map[i++] = ligne;
+		parse->map[i++] = ligne;
 		ligne = get_next_line(fd);
 	}
-	map[i] = NULL;
+	parse->map[i] = NULL;
 	close (fd);
-	return (map);
 }
+
 
 int	check_file(char *map)
 {
@@ -94,7 +93,7 @@ void	free_map(char **map)
 
 int	main(int argc, char **argv)
 {
-	char	**map;
+	t_parse	parse;
 
 	if (argc != 2)
 	{
@@ -107,9 +106,10 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	check_file(argv[1]);
-	map = stock_map(argv[1]);
-	check_map_form(map);
-	free_map(map);
-	check_walls(map);
+	stock_map(argv[1], &parse);
+	check_map_form(&parse);
+	check_walls(&parse);
+	check_items(&parse);
+	free_map(parse.map);
 	return (0);
 }

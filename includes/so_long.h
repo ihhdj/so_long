@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:54:31 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/09 17:53:21 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:23:51 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,24 @@
 # include "../libft/header/ft_printf.h"
 # include <mlx.h>
 
-typedef struct s_map
+typedef struct s_parse
 {
-	char	**gnlmap;
-	int		width;
-	int		height;
-	int		player_x;
-	int		player_y;
-	int		collectibles;
-	int		exits;
-	int		players;
-}	t_map;
+	char	**map;
+	int		line_map;
+	int		colonne_map;
+	char	*ligne_gnl;
+	int		pos;
+	int		item;
+	int		eexit;
+	size_t	long_line;
+}	t_parse;
 
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*textures[5];
-	t_map	*map;
-}	t_data;
-
-int		check_map_form(char **map);
-char	**stock_map(char *filename);
+int		check_map_form(t_parse *parse);
+void	stock_map(char *filename,t_parse *parse);
 int		check_file(char *map);
 void	free_map(char **map);
 int		main(int argc, char **argv);
-int		check_walls(char	**map);
+int		check_walls(t_parse *parse);
+int		check_items(t_parse *parse);
+
 #endif
