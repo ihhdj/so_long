@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:42:19 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/11 15:57:48 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:59:54 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,17 @@ int	ft_count_lines(char	*filename, t_parse *parse)
 {
 	int		fd;
 	int		count;
-	char	*lignes;
 	
 	count = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		ft_error("Error:\ncannot open this file", parse);
-	lignes = get_next_line(fd);
-	while (lignes)
+	parse->ligne_gnl = get_next_line(fd);
+	while (parse->ligne_gnl)
 	{
 		count++;
-		free (lignes);
-		lignes = get_next_line(fd);
+		free (parse->ligne_gnl);
+		parse->ligne_gnl = get_next_line(fd);
 	}
 	close (fd);
 	return (count);
