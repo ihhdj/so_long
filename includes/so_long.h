@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:54:31 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/11 15:20:34 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/12 20:16:05 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct s_parse
 {
 	char	**map;
+	char	**copy;
 	int		line_map;
 	int		colonne_map;
 	char	*ligne_gnl;
@@ -32,6 +33,10 @@ typedef struct s_parse
 	int		eexit;
 	size_t	long_line;
 	int		count;
+	int		cols;
+	int		rows;
+	int		start_x;
+	int		start_y;
 }	t_parse;
 
 int		check_map_form(t_parse *parse);
@@ -43,4 +48,9 @@ int		check_items(t_parse *parse);
 void	ft_error(char *str, t_parse *parse);
 void	init_parse(t_parse *parse);
 int		ft_count_lines(char	*filename, t_parse *parse);
+void	flood_fill(char	**map, int x, int y, t_parse *parse);
+int		find_pos(t_parse *parse);
+char	**copy_map(t_parse *parse);
+void	print_map(char **map);
+void	check_flood(t_parse *parse);
 #endif

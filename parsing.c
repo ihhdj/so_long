@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/11 15:20:54 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/12 20:18:48 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ int	main(int argc, char **argv)
 	check_map_form(&parse);
 	check_walls(&parse);
 	check_items(&parse);
+	find_pos(&parse);
+	parse.copy = copy_map(&parse);
+	flood_fill(parse.copy, parse.start_x, parse.start_y, &parse);
+	print_map(parse.copy);
+	check_flood(&parse);
 	free_map(parse.map);
 	return (0);
 }
