@@ -6,38 +6,37 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:42:19 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/12 13:26:35 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:19:40 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 
-int	check_walls(t_parse *parse)
+int	check_walls(t_parse *p)
 {
 	int	i;
 
 	i = 0;
-	parse->line_map = 0;
-	while (parse->map[parse->line_map])
-		parse->line_map++;
-	parse->colonne_map = ft_strlen(parse->map[0]);
-	while (i < parse->colonne_map) 
+	p->line_map = 0;
+	while (p->map[p->line_map])
+		p->line_map++;
+	p->colonne_map = ft_strlen(p->map[0]);
+	while (i < p->colonne_map)
 	{
-		if (parse->map[0][i] != '1' ||
-			parse->map[parse->line_map - 1][i] != '1')
-			ft_error("Error\nmap is not surrounded by walls", parse);
+		if (p->map[0][i] != '1' || p->map[p->line_map - 1][i] != '1')
+			ft_error("Error\nmap is not surrounded by walls", p);
 		i++;
 	}
 	i = 0;
-	while (i < parse->line_map)
+	while (i < p->line_map)
 	{
-		if (parse->map[i][0] != '1' ||
-			parse->map[i][parse->colonne_map - 1] != '1')
-			ft_error("Error\nmap is not surrounded by walls", parse);
+		if (p->map[i][0] != '1' || p->map[i][p->colonne_map - 1] != '1')
+			ft_error("Error\nmap is not surrounded by walls", p);
 		i++;
 	}
 	return (1);
 }
+
 void	init_parse(t_parse *parse)
 {
 	parse->map = NULL;
@@ -52,7 +51,7 @@ int	check_items(t_parse *parse)
 	int	j;
 
 	i = 0;
-	while(parse->map[i])
+	while (parse->map[i])
 	{
 		j = 0;
 		while (parse->map[i][j])
@@ -81,11 +80,12 @@ void	ft_error(char *str, t_parse *parse)
 		free_map(parse->map);
 	exit(EXIT_FAILURE);
 }
+
 int	ft_count_lines(char	*filename, t_parse *parse)
 {
 	int		fd;
 	int		count;
-	
+
 	count = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)

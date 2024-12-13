@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/12 20:18:48 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:38:27 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_map_form(t_parse *parse)
 {
 	int		i;
 	size_t	line;
-	
+
 	line = ft_strlen(parse->map[0]);
 	i = 1;
 	if (!parse->map || !parse->map[0])
@@ -30,13 +30,12 @@ int	check_map_form(t_parse *parse)
 	return (1);
 }
 
-void stock_map(char *filename,  t_parse *parse)
+void	stock_map(char *filename, t_parse *parse)
 {
 	char	*ligne;
 	int		fd;
 	int		i;
-	
-	
+
 	i = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -75,7 +74,7 @@ void	free_map(char **map)
 	int	i;
 
 	if (!map)
-		return;
+		return ;
 	i = 0;
 	while (map[i])
 	{
@@ -88,6 +87,7 @@ void	free_map(char **map)
 int	main(int argc, char **argv)
 {
 	t_parse	parse;
+	t_data	data;
 
 	init_parse(&parse);
 	if (argc != 2)
@@ -96,14 +96,11 @@ int	main(int argc, char **argv)
 		ft_error("Error\nchoose a .ber file", &parse);
 	check_file(argv[1], &parse);
 	stock_map(argv[1], &parse);
-	check_map_form(&parse);
-	check_walls(&parse);
-	check_items(&parse);
-	find_pos(&parse);
-	parse.copy = copy_map(&parse);
-	flood_fill(parse.copy, parse.start_x, parse.start_y, &parse);
-	print_map(parse.copy);
-	check_flood(&parse);
-	free_map(parse.map);
+	data.mlx_ptr = mlx_init();
+	if (!data.mlx_ptr)
+		return (1);
+	free(data.mlx_ptr);
+	parsing(&parse);
+	create_window(&data);
 	return (0);
 }
