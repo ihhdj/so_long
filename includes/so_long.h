@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:54:31 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/13 17:36:43 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:36:17 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ typedef	struct s_data
 {
 	void	*mlx_ptr;
 	void	*window;
-	void	*textures[5];
-	char	**map;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
 }	t_data;
 
 int		check_map_form(t_parse *parse);
@@ -61,6 +64,7 @@ int		find_pos(t_parse *parse);
 char	**copy_map(t_parse *parse);
 void	print_map(char **map);
 void	check_flood(t_parse *parse);
-void	parsing(t_parse	*parse);
+void	parsing(t_parse	*parse, t_data *data);
 int		create_window(t_data *data);
+void	put_pixel(t_data *data, int x, int y, int color);
 #endif
