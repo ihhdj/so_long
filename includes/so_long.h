@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:54:31 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/16 10:36:17 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:45:31 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,24 @@ typedef	struct s_parse
 	int		start_y;
 }	t_parse;
 
-typedef	struct s_data
+typedef	struct s_game
 {
-	void	*mlx_ptr;
+	void	*mlx;
 	void	*window;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-}	t_data;
+	int		height;
+	int		width;
+	char	**map;
+}	t_game;
+
+typedef	struct s_textures
+{
+	void	*background;
+	void	*wall;
+	void	*player;
+	void	*collec;
+	void	*exit;
+}	t_textures;
+
 
 int		check_map_form(t_parse *parse);
 void	stock_map(char *filename, t_parse *parse);
@@ -64,7 +72,7 @@ int		find_pos(t_parse *parse);
 char	**copy_map(t_parse *parse);
 void	print_map(char **map);
 void	check_flood(t_parse *parse);
-void	parsing(t_parse	*parse, t_data *data);
-int		create_window(t_data *data);
-void	put_pixel(t_data *data, int x, int y, int color);
+void	parsing(t_parse	*parse, t_game *game, t_textures *text);
+void	load_textures(t_game *game, t_textures *text);
+void	init_game(t_game *game, char **map);
 #endif

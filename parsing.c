@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:16:32 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/16 11:20:34 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:59:54 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void	free_map(char **map)
 int	main(int argc, char **argv)
 {
 	t_parse	parse;
-	t_data	data;
+	t_game	game;
+	t_textures textures;
 
-	data.mlx_ptr = mlx_init();
 	init_parse(&parse);
 	if (argc != 2)
 		ft_error("Error\nargument error", &parse);
@@ -97,6 +97,6 @@ int	main(int argc, char **argv)
 		ft_error("Error\nchoose a .ber file", &parse);
 	check_file(argv[1], &parse);
 	stock_map(argv[1], &parse);
-	parsing(&parse, &data);
+	parsing(&parse, &game, &textures);
 	return (0);
 }
