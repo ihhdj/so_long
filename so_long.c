@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 10:31:37 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/18 18:58:31 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:11:21 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	parsing(t_parse	*parse, t_game *game, t_textures *text)
 	check_flood(parse);
 	init_game(game, parse->map);
 	load_textures(game, text);
+	draw_map(game, text, parse);
+	mlx_loop(game->mlx);
 	free_map(parse->copy);
 	free_map(parse->map);
 }
@@ -59,4 +61,28 @@ void	load_textures(t_game *game, t_textures *text)
 		exit(EXIT_FAILURE);
 	}
 }
+void	draw_map(t_game *game, t_textures *text, t_parse *parse)
+{
+	int	y;
+	int	x;
 
+	y = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (x < game->width)
+		{
+			mlx_put_image_to_window(game->mlx, game->window, text->background,x * 64, y * 64);
+			if (parse->map[y][x] == '1')
+				mlx_put_image_to_window(game->mlx, game->window, text->wall,x * 64, y * 64);
+			if (parse->map[y][x] == 'P')
+				mlx_put_image_to_window(game->mlx, game->window, text->player,x * 64, y * 64);
+			if (parse->map[y][x] == 'E')
+				mlx_put_image_to_window(game->mlx, game->window, text->exit,x * 64, y * 64);
+			if (parse->map[y][x] == 'C')
+				mlx_put_image_to_window(game->mlx, game->window, text->collec,x * 64 ,y * 64);
+			x++;
+		}
+		y++;
+	}
+}

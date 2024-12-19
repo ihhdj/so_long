@@ -6,7 +6,7 @@
 /*   By: ihhadjal <ihhadjal@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:54:31 by ihhadjal          #+#    #+#             */
-/*   Updated: 2024/12/18 17:45:31 by ihhadjal         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:09:44 by ihhadjal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ void	check_flood(t_parse *parse);
 void	parsing(t_parse	*parse, t_game *game, t_textures *text);
 void	load_textures(t_game *game, t_textures *text);
 void	init_game(t_game *game, char **map);
+void	draw_map(t_game *game, t_textures *text, t_parse *parse);
 #endif
